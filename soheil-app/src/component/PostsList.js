@@ -36,7 +36,7 @@ export default function PostsList() {
           <li key={post.id}>
             <strong>Post Id :</strong> {post.id}
             <br />
-            <stron>Post Title</stron>
+            <strong>Post Title</strong>
             {post.title}
           </li>
         ))}
