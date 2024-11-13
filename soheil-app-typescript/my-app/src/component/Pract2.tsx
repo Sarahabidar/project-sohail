@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-export default function PostList() {
+export default function Pract2() {
   const [posts, setPost] = useState<Array<{ id: number; title: string }>>([]);
   useEffect(() => {
     fetch("https://jsonplaceholder.typicode.com/posts")

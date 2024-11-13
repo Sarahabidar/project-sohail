@@ -1,9 +1,9 @@
-import PostList from "./component/PostList";
+import PostsItem from "./component/PostsItem";
 
 function App() {
   return (
     <div className="App">
-      <PostList />
+      <PostsItem />
     </div>
   );
 }
