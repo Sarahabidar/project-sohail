@@ -1,0 +1,22 @@
+.navBar {
+  background-color: #f4c7c3;
+  box-shadow: 1px 1px 10px gray;
+  padding: 10px;
+}
+.navLinkExtra {
+  margin-bottom: 10px;
+}
+.navLink {
+  .navLink {
+    margin-right: 10px;
+    padding: 5px;
+    border: 1px solid white;
+    color: white;
+    border-radius: 5px;
+    text-decoration: none;
+  }
+
+  .active {
+    border-color: rgb(196, 38, 117);
+  }
+}
