@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 import Post from "../types/postType";
+import { useNavigate } from "react-router-dom";
+import { appRouter } from "../router/appRouter";
 
 enum SortOrder {
   Ascending = "ascending",
@@ -9,6 +11,7 @@ enum SortOrder {
 //type PostList = Post[];
 
 export default function PostListPage() {
+  const navigate = useNavigate();
   const [posts, setPosts] = useState<Post[]>([]);
   const [sortOrder, setSortOrder] = useState<SortOrder>(SortOrder.Ascending);
 
@@ -20,6 +23,12 @@ export default function PostListPage() {
       })
       .catch((error) => console.log("an error occured:", error));
   }, []);
+
+  const handleHomeButton = () => {
+    navigate(appRouter.HOME_PAGE, {
+      replace: true,
+    });
+  };
 
   function handleSort() {
     if (sortOrder === SortOrder.Ascending)
@@ -33,6 +42,7 @@ export default function PostListPage() {
   return (
     <div>
       <h2>Post List</h2>
+      <button onClick={handleHomeButton}>GO to Home</button>
       <button onClick={handleSort}>
         {sortOrder === SortOrder.Ascending ? "Descending" : "Ascending"}
       </button>
@@ -44,6 +54,11 @@ export default function PostListPage() {
             <br />
             <strong>Post Title:</strong>
             {post.title}
+            <button
+              onClick={() => navigate(appRouter.POST_LIST_ITEM + post.id)}
+            >
+              Learn more
+            </button>
           </li>
         ))}
       </ul>

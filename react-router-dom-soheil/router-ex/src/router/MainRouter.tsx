@@ -4,6 +4,7 @@ import HomePage from "../pages/HomePage.tsx";
 import PostListPage from "../pages/PostListPage";
 import NotFoundPage from "../pages/NotFoundPage.tsx";
 import MainLayout from "../layouts/mainLayout/MainLayout.tsx";
+import PostListItem from "../pages/PostListItem.tsx";
 
 const MainRouter = () => {
   return (
@@ -14,6 +15,10 @@ const MainRouter = () => {
         <Route element={<MainLayout />}>
           <Route path={appRouter.HOME_PAGE} element={<HomePage />} />
           <Route path={appRouter.POST_LIST_PAGE} element={<PostListPage />} />
+          <Route
+            path={appRouter.POST_LIST_ITEM + `:id`}
+            element={<PostListItem />}
+          />
         </Route>
       </Routes>
     </BrowserRouter>

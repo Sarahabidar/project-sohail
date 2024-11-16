@@ -5,6 +5,7 @@ import styles from "./MainLayout.module.css";
 const MainLayout = () => {
   return (
     <div>
+      {/*<div className={`${styles.navbar} ${styles.navLinkEtra}`}></div>*/}
       <div className={[styles.navBar, styles.navLinkExtra].join(" ")}>
         <NavLink
           to={appRouter.HOME_PAGE}
