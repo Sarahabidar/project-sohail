@@ -1,3 +1,4 @@
+import axios from "axios";
 import { useState, useEffect } from "react";
 import Post from "../types/postType";
 import { useNavigate } from "react-router-dom";
@@ -14,6 +15,22 @@ export default function PostListPage() {
   const navigate = useNavigate();
   const [posts, setPosts] = useState<Post[]>([]);
   const [sortOrder, setSortOrder] = useState<SortOrder>(SortOrder.Ascending);
+
+  const getList = () => {
+    axios
+      .get("https://jsonplaceholder.typicode.com/posts")
+      /*result.then((data: Post[]) => {
+      setPosts(data);
+    });*/
+      .then((response) => {
+        setPosts(response.data);
+      })
+      .catch((error) => console.log("an error occured:", error));
+  };
+
+  useEffect(() => {
+    getList();
+  }, []);
 
   useEffect(() => {
     fetch("https://jsonplaceholder.typicode.com/posts")
