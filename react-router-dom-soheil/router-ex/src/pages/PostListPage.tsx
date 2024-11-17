@@ -49,6 +49,7 @@ export default function PostListPage() {
       <ul>
         {posts.map((post) => (
           <li key={post.id}>
+            {/*<Link to = {`/postList/${post.id}`}></Link> */}
             <strong>Post Id:</strong>
             {post.id}
             <br />
