@@ -28,18 +28,27 @@ export default function PostListPage() {
       .catch((error) => console.log("an error occured:", error));
   };
 
+  /*const getList = () => {
+    const result = axios.get<Post[]>(
+      "https://jsonplaceholder.typicode.com/posts"
+    );
+    result.then((response) => {
+      setPosts(response.data);
+    });
+  };*/
+
   useEffect(() => {
     getList();
   }, []);
-
-  useEffect(() => {
+  /* when we use then &catch we dont use async await try */
+  /* useEffect(() => {
     fetch("https://jsonplaceholder.typicode.com/posts")
       .then((response) => response.json())
       .then((data: Post[]) => {
         setPosts(data);
       })
       .catch((error) => console.log("an error occured:", error));
-  }, []);
+  }, []);*/
 
   const handleHomeButton = () => {
     navigate(appRouter.HOME_PAGE, {

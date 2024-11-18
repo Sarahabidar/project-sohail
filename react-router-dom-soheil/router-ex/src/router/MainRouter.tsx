@@ -5,6 +5,8 @@ import PostListPage from "../pages/PostListPage";
 import NotFoundPage from "../pages/NotFoundPage.tsx";
 import MainLayout from "../layouts/mainLayout/MainLayout.tsx";
 import PostListItem from "../pages/PostListItem.tsx";
+import LoginLayout from "../layouts/loginLayout/LoginLayout.tsx";
+import LoginPage from "../pages/loginPage/LoginPage.tsx";
 
 const MainRouter = () => {
   return (
@@ -19,6 +21,9 @@ const MainRouter = () => {
             path={appRouter.POST_LIST_ITEM + `:id`}
             element={<PostListItem />}
           />
+        </Route>
+        <Route element={<LoginLayout />}>
+          <Route path={appRouter.LOGIN_PAGE} element={<LoginPage />} />
         </Route>
       </Routes>
     </BrowserRouter>

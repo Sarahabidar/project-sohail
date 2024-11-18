@@ -1,18 +1,35 @@
-import { NavLink, Outlet } from "react-router-dom";
+import { NavLink, Outlet, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+
 import { appRouter } from "../../router/appRouter";
 import styles from "./MainLayout.module.css";
 
 const MainLayout = () => {
+  const [username, setUsername] = useState<string | null>(null);
+  const navigate = useNavigate();
+  /*const location = useLocation();
+  const isLoginPage = location.pathname === appRouter.LOGIN_PAGE;*/
+
+  useEffect(() => {
+    const storedUsername = localStorage.getItem("username");
+    setUsername(storedUsername);
+  }, []);
+
+  const handleLogout = () => {
+    localStorage.removeItem("username");
+    setUsername(null);
+    navigate(appRouter.LOGIN_PAGE, { replace: true });
+  };
+
   return (
     <div>
-      {/*<div className={`${styles.navbar} ${styles.navLinkEtra}`}></div>*/}
+      {/*<div classNamae={`${styles.navbar} ${styles.navLinkEtra}`}></div>*/}
       <div className={[styles.navBar, styles.navLinkExtra].join(" ")}>
         <NavLink
           to={appRouter.HOME_PAGE}
           className={({ isActive }) =>
             [styles.navLink, isActive ? styles.active : ""].join(" ")
           }
-          replace
         >
           Home
         </NavLink>
@@ -25,6 +42,20 @@ const MainLayout = () => {
         >
           Post List
         </NavLink>
+        {username ? (
+          <button onClick={handleLogout} className={styles.logoutButton}>
+            Logout ({username})
+          </button>
+        ) : (
+          <NavLink
+            to={appRouter.LOGIN_PAGE}
+            className={({ isActive }) =>
+              [isActive ? styles.active : ""].join(" ")
+            }
+          >
+            Login
+          </NavLink>
+        )}
       </div>
       <Outlet />
     </div>
