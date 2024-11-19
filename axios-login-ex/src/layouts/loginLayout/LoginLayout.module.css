@@ -1,0 +1,19 @@
+.navBar {
+  display: flex;
+  justify-content: space-between;
+  background-color: #9c27b0;
+  box-shadow: 1px 1px 10px gray;
+  padding: 15px;
+}
+.loginNavLink {
+  margin-right: 10px;
+  padding: 5px;
+  border: 1px solid rgb(5, 46, 108);
+  color: rgb(5, 46, 108);
+  border-radius: 5px;
+  text-decoration: none;
+}
+.active {
+  background-color: rgb(5, 46, 108);
+  color: white;
+}
