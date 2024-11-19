@@ -1,13 +1,20 @@
 import { useNavigate } from "react-router-dom";
 import { appRouter } from "../../router/appRouter";
 import { useState } from "react";
+import { useForm } from "react-hook-form";
+import LoginType from "../../types/loginType";
 
 const LoginPage = () => {
   const [username, setUsername] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const navigate = useNavigate();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<LoginType>();
 
-  const handleLoginButton = (e: React.FormEvent<HTMLFormElement>) => {
+  const checkLoginButton = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     if (username && password) {
@@ -22,24 +29,35 @@ const LoginPage = () => {
   };
 
   return (
-    <form onSubmit={handleLoginButton}>
-      <h2>Login</h2>
-      <input
-        type="text"
-        placeholder="Username"
-        value={username}
-        onChange={(e) => setUsername(e.target.value)}
-      />
-      <br />
-      <input
-        type="password"
-        placeholder="Password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-      />
-      <br />
-      <button type="submit">Login</button>
-    </form>
+    <div>
+      <form onSubmit={handleSubmit(checkLoginButton)}>
+        <h2>Login</h2>
+        <h4>{errors.username?.message}</h4>
+        <label htmlFor="username">Username:</label>
+        <input
+          {...register("username", {
+            required: {
+              value: true,
+              message: "hey, username is required!",
+            },
+          })}
+          type="text"
+          placeholder="Username"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+        />
+        <br />
+        <label htmlFor="password">Password:</label>
+        <input
+          type="password"
+          placeholder="Password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+        <br />
+        <button type="submit">Login</button>
+      </form>
+    </div>
   );
 };
 
