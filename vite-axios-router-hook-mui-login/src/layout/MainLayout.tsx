@@ -4,12 +4,14 @@ import styles from "./MainLayout.module.css";
 const MainLayout = () => {
   return (
     <div>
-      <div className={`${styles.navBar} ${styles.navLinkExtra}`}>
+      {/*<div className={`${styles.navBar} ${styles.navLinkExtra}`}>*/}
+      <div className={[styles.navBar, styles.navLinkExtra].join(" ")}>
         <NavLink
           to={appRouter.HOME_PAGE}
           className={({ isActive }) =>
             [styles.navLink, isActive ? styles.active : ""].join(" ")
           }
+          replace
         >
           Home
         </NavLink>
@@ -18,6 +20,7 @@ const MainLayout = () => {
           className={({ isActive }) =>
             [styles.navLink, isActive ? styles.active : ""].join(" ")
           }
+          replace
         >
           Post List
         </NavLink>
