@@ -2,6 +2,7 @@ import { NavLink, Outlet, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { appRouter } from "../../router/appRouter";
 import styles from "./MainLayout.module.css";
+import { Button } from "@mui/material";
 
 const MainLayout = () => {
   const [username, setUsername] = useState<string | null>(null);
@@ -42,9 +43,14 @@ const MainLayout = () => {
           Post List
         </NavLink>
         {username ? (
-          <button onClick={handleLogout} className={styles.logoutButton}>
+          <Button
+            onClick={handleLogout}
+            variant="contained"
+            color="secondary"
+            className={styles.logoutButton}
+          >
             Logout ({username})
-          </button>
+          </Button>
         ) : (
           <NavLink
             to={appRouter.LOGIN_PAGE}

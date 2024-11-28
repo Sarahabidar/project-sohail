@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const apiClient = axios.create({
-  baseURL: "https://jsonplaceholder.typicode.com/posts",
+  baseURL: "https://jsonplaceholder.typicode.com/",
 });
 apiClient.interceptors.request.use((request) => {
   const username = localStorage.getItem("username");

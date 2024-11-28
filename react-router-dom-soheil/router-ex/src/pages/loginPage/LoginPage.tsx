@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { appRouter } from "../../router/appRouter";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 const LoginPage = () => {
   const [username, setUsername] = useState<string>("");
