@@ -4,6 +4,7 @@ import PostListPage from "../pages/PostListPage";
 import { appRouter } from "./appRouter";
 import MainLayout from "../layout/MainLayout";
 import NotFoundPage from "../pages/NotFoundPage";
+import PostItemPage from "../pages/PostItemPage";
 const MainRouter = () => {
   return (
     <BrowserRouter>
@@ -13,6 +14,10 @@ const MainRouter = () => {
         <Route element={<MainLayout />}>
           <Route path={appRouter.HOME_PAGE} element={<HomePage />} />
           <Route path={appRouter.POST_LIST_PAGE} element={<PostListPage />} />
+          <Route
+            path={appRouter.POST_ITEM_PAGE + ":id"}
+            element={<PostItemPage />}
+          />
         </Route>
       </Routes>
     </BrowserRouter>
