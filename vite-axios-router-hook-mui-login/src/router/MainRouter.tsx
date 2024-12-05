@@ -2,9 +2,11 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import HomePage from "../pages/HomePage";
 import PostListPage from "../pages/PostListPage";
 import { appRouter } from "./appRouter";
-import MainLayout from "../layout/MainLayout";
+import MainLayout from "../layout/mainLayout/MainLayout";
 import NotFoundPage from "../pages/NotFoundPage";
 import PostItemPage from "../pages/PostItemPage";
+import LoginLayout from "../layout/loginLayout/LoginLayout";
+import LoginPage from "../pages/LoginPage";
 const MainRouter = () => {
   return (
     <BrowserRouter>
@@ -18,6 +20,9 @@ const MainRouter = () => {
             path={appRouter.POST_ITEM_PAGE + ":id"}
             element={<PostItemPage />}
           />
+        </Route>
+        <Route element={<LoginLayout />}>
+          <Route path={appRouter.LOGIN_PAGE} element={<LoginPage />}></Route>
         </Route>
       </Routes>
     </BrowserRouter>

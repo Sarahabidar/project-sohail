@@ -10,7 +10,7 @@ enum SortOrder {
 
 export default function PostListPage() {
   const navigate = useNavigate();
-  const { data, error } = usePostCRUD();
+  const { data, error, deletePost } = usePostCRUD();
   const [sortOrder, setSortOrder] = useState<SortOrder>(SortOrder.Ascending);
 
   const handleHomeButton = () => {
@@ -32,8 +32,15 @@ export default function PostListPage() {
       );
     }
   }
+  const handleDeletePost = async (postId: number) => {
+    try {
+      await deletePost(postId);
+    } catch (error) {
+      console.error("Failed to delete post:", error);
+    }
+  };
 
-  if (error) return <p>An error occurred: {error.message}</p>; //
+  if (error) return <p>An error occurred: {error.message}</p>; 
 
   return (
     <div>
@@ -52,6 +59,7 @@ export default function PostListPage() {
               <button onClick={() => navigate(appRouter.POST_LIST_ITEM + m.id)}>
                 Learn more
               </button>
+              <button onClick={() => handleDeletePost(m.id)}>Delete</button>
             </li>
           ))}
       </ul>
