@@ -1,10 +1,22 @@
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { appRouter } from "../router/appRouter";
 import usePostCRUD from "../hooks/usePostCRUD";
+import { nanoid } from "nanoid";
 
 const PostListPage = () => {
   const navigate = useNavigate();
-  const { data, error, deletePost } = usePostCRUD();
+  const { data, error, deletePost, createPost } = usePostCRUD();
+  const [newPost, setNewPost] = useState({ title: "" });
+
+  const generateNewId = () => {
+    if (data && data.length > 0) {
+      // Hier wird die höchste ID + 1 als neue ID gesetzt
+      return Math.max(...data.map((post) => post.id)) + 1;
+    }
+    return 1; // Wenn keine Posts vorhanden sind, beginnt die ID bei 1
+  };
+
   /*const [posts, setPosts] = useState<Post[]>([]);
 const getList = () => {
     //const result = axios.get("https://jsonplaceholder.typicode.com/posts");
@@ -37,12 +49,36 @@ const getList = () => {
     }
   };
 
+  const handleCreatePost = async () => {
+    try {
+      if (!newPost.title) {
+        alert("Please provide a title.");
+        return;
+      }
+      const newPostWithId = { id: generateNewId(), title: newPost.title };
+      await createPost(newPostWithId);
+      setNewPost({ title: "" }); // Reset the form
+    } catch (error) {
+      console.error("Failed to create post:", error);
+    }
+  };
+
   if (error) return <p>An error occurred: {error.message}</p>;
 
   return (
     <div>
       <h2>Post List</h2>
       <button onClick={handleHomeButton}>Go To Home</button>
+      <div>
+        <h3>Create New Post</h3>
+        <input
+          type="text"
+          placeholder="Post Title"
+          value={newPost.title}
+          onChange={(e) => setNewPost({ title: e.target.value })}
+        />
+        <button onClick={handleCreatePost}>Add Post</button>
+      </div>
       <ul>
         {data?.map((m) => (
           <li key={m.id}>
