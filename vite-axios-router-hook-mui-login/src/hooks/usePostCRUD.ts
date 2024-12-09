@@ -37,8 +37,8 @@ const usePostCRUD = () => {
   const createPost = async (newPost: { id: number; title: string }) => {
     await apiClient
       .post<Post>("posts", newPost)
-      .then((response) => {
-        setData((prev) => (prev ? [...prev, response.data] : [response.data]));
+      .then(() => {
+        setData((prev) => (prev ? [...prev, newPost] : [newPost]));
       })
       .catch((error) => {
         setError(error);

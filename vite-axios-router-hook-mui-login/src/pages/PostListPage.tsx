@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { appRouter } from "../router/appRouter";
 import usePostCRUD from "../hooks/usePostCRUD";
-import { nanoid } from "nanoid";
+//import { nanoid } from "nanoid";
 
 const PostListPage = () => {
   const navigate = useNavigate();
@@ -11,29 +11,12 @@ const PostListPage = () => {
 
   const generateNewId = () => {
     if (data && data.length > 0) {
-      // Hier wird die höchste ID + 1 als neue ID gesetzt
-      return Math.max(...data.map((post) => post.id)) + 1;
+      return data[data.length - 1].id + 1;
+      // return nanoid();
+      // return Math.max(...data.map((post) => post.id)) + 1;
     }
-    return 1; // Wenn keine Posts vorhanden sind, beginnt die ID bei 1
+    return 1;
   };
-
-  /*const [posts, setPosts] = useState<Post[]>([]);
-const getList = () => {
-    //const result = axios.get("https://jsonplaceholder.typicode.com/posts");
-    //result.then((res) => {
-    //console.log(res.data);
-    //});
-    axios
-      .get("https://jsonplaceholder.typicode.com/posts")
-      .then((response) => {
-        setPosts(response.data);
-      })
-      .catch((error) => console.log("an error occured:", error));
-  };
-  useEffect(() => {
-    getList();
-  }, []);
-  --------------------------------------------------------------------------------------------*/
 
   const handleHomeButton = () => {
     //window.location.href = appRouter.HOME_PAGE; this ist vanila javascript, this has same result same next line! but we use there useNavigate!
